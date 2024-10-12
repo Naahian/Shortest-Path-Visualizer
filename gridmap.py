@@ -4,21 +4,30 @@ from tile import Tile
 
 
 class GridMap:
-    def __init__(self, width, rows, screen, inverted=False):
+    def __init__(self, width, rows, screen, ):
         self.width = width
         self.rows = rows
         self.screen = screen
         self.tileWidth = width // rows
-        self.inverted = inverted
+        
         self.grid = []
-        # create grid
+        self._createGrid()
+        self._createNeighbors()
+
+    def _createGrid(self):
         for i in range(self.rows):
             self.grid.append([])
             for j in range(self.rows):
-                tile = Tile(self.tileWidth, i, j)
-                if (self.inverted):
-                    tile.invertColors()
+                tile = Tile(self.tileWidth, i, j, self.grid)
+                if(i==0 or j==0 or i==(self.rows-1) or j==(self.rows-1)): #make boundary barier
+                    tile.makeObstacle() 
                 self.grid[i].append(tile)
+        
+    
+    def _createNeighbors(self):
+        for row in self.grid:
+            for tile in row:
+                tile.generateNeighbors()
 
     def _drawTiles(self):
         for row in self.grid:

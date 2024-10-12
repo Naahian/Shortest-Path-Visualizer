@@ -2,6 +2,7 @@ import pygame
 from algorithoms import Algorithoms
 from constants import *
 from gridmap import GridMap
+from tile import Tile
 
 
 class AlgoVisualizer:
@@ -35,16 +36,8 @@ class AlgoVisualizer:
                     self.running = False
                 if (event.key == pygame.K_r):
                     self._restart()
-                if (event.key == pygame.K_i):
-                    self._restart(inverted = not self.map.inverted)
-                #start algo
-                if (event.key == pygame.K_SPACE):
-                    for i in range(Config.rows):
-                        for j in range(Config.rows):
-                            if(i==j):
-                                self.map.grid[i][j].makeEnd()
-                                pygame.time.delay(30)
-                                self._draw()
+             
+
     def _draw(self):
         self.screen.fill(Colors.white)
         self.map.draw()
@@ -55,30 +48,37 @@ class AlgoVisualizer:
         row, col = self.get_clicked_pos(pos)
         tile = self.map.grid[row][col]
 
+        
+
         if (pygame.mouse.get_pressed()[0]):
             if ((not tile.isStart()) and (not tile.isEnd())):
                 tile.makeObstacle()
         if (pygame.mouse.get_pressed()[2]):
             tile = self.map.grid[row][col]
         
-            if (not self.hasStart and tile.isBlank()):
+            if (self.startNode == None and tile.isBlank()):
                 tile.makeStart()
-                self.hasStart = True
-            elif (self.hasStart and not self.hasEnd and tile.isBlank()):
+                self.startNode = tile
+            elif (not (self.startNode == None) and (self.endNode == None) and tile.isBlank()):
                 tile.makeEnd()
-                self.hasEnd = True
-        
+                self.endNode = tile
+                Algorithoms(tileList= self.map.grid, draw=lambda:self._draw()).bfs_dijkstra(
+                    start=self.startNode,
+                    end=self.endNode
+                )
+                                   
+                    
 
-    def _restart(self, inverted=False):
-        self._initial(inverted=inverted)
+    def _restart(self):
+        self._initial()
         self._draw()
 
-    def _initial(self, inverted=False):
+    def _initial(self):
         self.map: GridMap = GridMap(
-            screen=self.screen, rows=Config.rows, width=self.screen_size[0], inverted=inverted)
+            screen=self.screen, rows=Config.rows, width=self.screen_size[0])
         
-        self.hasStart = False
-        self.hasEnd = False
+        self.startNode:Tile = None
+        self.endNode:Tile = None
 
     def get_clicked_pos(self, pos):
         tile_width = self.map.width // self.map.rows

@@ -1,18 +1,34 @@
 import pygame
-from constants import Colors, Config
+from constants import Colors
 
 
 class Tile:
-    def __init__(self, width, row, col):
+    def __init__(self, width, row, col, grid):
         self.width = width
+        self.grid = grid
         self.row = row
         self.col = col
         self.x = row * width
         self.y = col * width
-        self.neighbors = []
         self.inverted = False
         self.color = Colors.white
+        self.neighbors = []
 
+    def generateNeighbors(self):
+        j = self.col
+        i = self.row
+        
+        if(not self.isObstacle()):
+            if(not self.grid[i-1][j].isObstacle()):
+                self.neighbors.append(self.grid[i-1][j])
+            if(not self.grid[i+1][j].isObstacle()):
+                self.neighbors.append(self.grid[i+1][j])
+            if(not self.grid[i][j-1].isObstacle()):
+                self.neighbors.append(self.grid[i][j-1])
+            if(not self.grid[i][j+1].isObstacle()):
+                self.neighbors.append(self.grid[i][j+1])
+
+    #3 1
     def invertColors(self):
         self.inverted = not self.inverted
         if (self.inverted):
@@ -38,7 +54,7 @@ class Tile:
         self.color = Colors.blue
 
     def makeVisited(self):
-        self.color = Colors.grey
+        self.color = Colors.yellow
 
     def reset(self):
         self.color = Colors.white
