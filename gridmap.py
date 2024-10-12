@@ -9,13 +9,14 @@ class GridMap:
         self.rows = rows
         self.screen = screen
         self.tileWidth = width // rows
+        self.inverted = inverted
         self.grid = []
         # create grid
         for i in range(self.rows):
             self.grid.append([])
             for j in range(self.rows):
                 tile = Tile(self.tileWidth, i, j)
-                if (inverted):
+                if (self.inverted):
                     tile.invertColors()
                 self.grid[i].append(tile)
 
@@ -23,6 +24,7 @@ class GridMap:
         for row in self.grid:
             for tile in row:
                 tile.draw(self.screen)
+                
 
     def _drawGrid(self):
         for i in range(self.rows):
@@ -34,3 +36,4 @@ class GridMap:
     def draw(self):
         self._drawTiles()
         self._drawGrid()
+

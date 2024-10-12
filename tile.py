@@ -1,5 +1,5 @@
 import pygame
-from constants import Colors
+from constants import Colors, Config
 
 
 class Tile:
@@ -28,9 +28,11 @@ class Tile:
 
     def makeStart(self):
         self.color = Colors.green
+        return self.row, self.col
 
     def makeEnd(self):
         self.color = Colors.red
+        return self.row, self.col
 
     def makePath(self):
         self.color = Colors.blue

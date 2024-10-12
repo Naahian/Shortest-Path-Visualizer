@@ -1,6 +1,6 @@
 class Config:
     fps = 60
-    rows = 30
+    rows = 40
 
 
 class Resolution:
