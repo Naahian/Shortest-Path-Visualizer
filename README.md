@@ -1,4 +1,4 @@
-## Algo-Visualizer
+## Shortest Path Visualizer
 (under development)<br>
 Simulation of SSSP(Single source shortest path) algorithoms. Includes DFS, BFS, Dijkstra and A*.<br>
 ### To Run
