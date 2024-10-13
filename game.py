@@ -5,7 +5,7 @@ from gridmap import GridMap
 from tile import Tile
 
 
-class AlgoVisualizer:
+class SSSPVisualizer:
     def __init__(self):
         self.screen: pygame.Surface
         self.screen_size: tuple
@@ -47,12 +47,11 @@ class AlgoVisualizer:
         pos = pygame.mouse.get_pos()
         row, col = self.get_clicked_pos(pos)
         tile = self.map.grid[row][col]
-
         
-
         if (pygame.mouse.get_pressed()[0]):
             if ((not tile.isStart()) and (not tile.isEnd())):
                 tile.makeObstacle()
+
         if (pygame.mouse.get_pressed()[2]):
             tile = self.map.grid[row][col]
         
@@ -76,7 +75,6 @@ class AlgoVisualizer:
     def _initial(self):
         self.map: GridMap = GridMap(
             screen=self.screen, rows=Config.rows, width=self.screen_size[0])
-        
         self.startNode:Tile = None
         self.endNode:Tile = None
 

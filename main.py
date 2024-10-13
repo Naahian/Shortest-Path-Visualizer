@@ -1,5 +1,5 @@
-from game import AlgoVisualizer
+from game import SSSPVisualizer
 
 if __name__ == "__main__":
-    game = AlgoVisualizer()
+    game = SSSPVisualizer()
     game.loop()
