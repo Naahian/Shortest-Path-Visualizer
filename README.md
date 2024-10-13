@@ -1,5 +1,5 @@
 ## Shortest Path Visualizer
-(under development)<br>
+(under development, currently has DFS, BFS)<br>
 Simulation of SSSP(Single source shortest path) algorithoms.Includes:<br>
 - BFS (garantees shortest path)
 - DFS (doesnot garantee shortest path)
