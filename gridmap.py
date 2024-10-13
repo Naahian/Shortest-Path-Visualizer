@@ -1,7 +1,7 @@
 import pygame
 from constants import Colors
 from tile import Tile
-
+import random
 
 class GridMap:
     def __init__(self, width, rows, screen, ):
@@ -34,6 +34,16 @@ class GridMap:
             for tile in row:
                 tile.draw(self.screen)
                 
+    def randomMaze(self, seed=1000):
+                
+        self.grid = []
+        self._createGrid()
+        self._createNeighbors()
+
+        for i in range(seed):
+            y = random.randint(1, self.rows-1)
+            x = random.randint(1, self.rows-1)
+            self.grid[y][x].makeObstacle()
 
     def _drawGrid(self):
         for i in range(self.rows):
@@ -41,6 +51,11 @@ class GridMap:
                              self.tileWidth), (self.width, i*self.tileWidth))
             pygame.draw.line(self.screen, Colors.grey,
                              (i*self.tileWidth, 0), (i*self.tileWidth, self.width))
+
+    def clearExplored(self):
+        for row in self.grid:
+            for tile in row:
+                if(not tile.isObstacle()): tile.reset()
 
     def draw(self):
         self._drawTiles()
