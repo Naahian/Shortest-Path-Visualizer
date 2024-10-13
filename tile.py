@@ -28,7 +28,6 @@ class Tile:
             if(not self.grid[i][j+1].isObstacle()):
                 self.neighbors.append(self.grid[i][j+1])
 
-    #3 1
     def invertColors(self):
         self.inverted = not self.inverted
         if (self.inverted):
