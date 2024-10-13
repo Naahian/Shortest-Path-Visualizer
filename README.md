@@ -1,6 +1,10 @@
 ## Shortest Path Visualizer
 (under development)<br>
-Simulation of SSSP(Single source shortest path) algorithoms. Includes DFS, BFS, Dijkstra and A*.<br>
+Simulation of SSSP(Single source shortest path) algorithoms.Includes:<br>
+- BFS (garantees shortest path)
+- DFS (doesnot garantee shortest path)
+- Dijkstra (garantees shortest path)
+- A* (fastest, garantees shortest path)
 ### To Run
 install `pygame` pacakge
 ```
