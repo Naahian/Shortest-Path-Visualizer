@@ -37,8 +37,7 @@ class Algorithoms:
                     stack.append(nbr)
         self._drawPath(start)
 
-    #since weight is 1 for all vertices
-    def bfs_dijkstra(self, start:Tile, end:Tile):
+    def bfs(self, start:Tile, end:Tile):
         self.path = []  #clear previous data
         queue = []
         visited = [[0 for i in range(len(self.graph))] for j in range(len(self.graph))]
