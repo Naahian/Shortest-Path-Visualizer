@@ -34,8 +34,10 @@ class SSSPVisualizer:
             if (event.type == pygame.KEYDOWN):
                 if (event.key == pygame.K_ESCAPE):
                     self.running = False
-                if (event.key == pygame.K_r):
+                if (event.key == pygame.K_c):
                     self._restart()
+                if (event.key == pygame.K_r):
+                    self.map.randomMaze()
              
 
     def _draw(self):
@@ -61,10 +63,16 @@ class SSSPVisualizer:
             elif (not (self.startNode == None) and (self.endNode == None) and tile.isBlank()):
                 tile.makeEnd()
                 self.endNode = tile
-                Algorithoms(tileList= self.map.grid, draw=lambda:self._draw()).bfs_dijkstra(
+                Algorithoms(tileList= self.map.grid, draw=lambda:self._draw()).bfs(
                     start=self.startNode,
                     end=self.endNode
                 )
+            elif(self.startNode and self.endNode):
+                self.startNode.reset()
+                self.startNode = None
+                self.endNode.reset()
+                self.endNode = None
+                self.map.clearExplored()
                                    
                     
 
