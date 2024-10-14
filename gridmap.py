@@ -34,13 +34,13 @@ class GridMap:
             for tile in row:
                 tile.draw(self.screen)
                 
-    def randomMaze(self, seed=1000):
+    def randomMaze(self, seed=22):
                 
         self.grid = []
         self._createGrid()
         self._createNeighbors()
 
-        for i in range(seed):
+        for i in range(self.rows * seed):
             y = random.randint(1, self.rows-1)
             x = random.randint(1, self.rows-1)
             self.grid[y][x].makeObstacle()
@@ -55,7 +55,7 @@ class GridMap:
     def clearExplored(self):
         for row in self.grid:
             for tile in row:
-                if(not tile.isObstacle()): tile.reset()
+                if(not tile.isObstacle() and not tile.isStart() and not tile.isEnd()): tile.reset()
 
     def draw(self):
         self._drawTiles()
