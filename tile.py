@@ -74,7 +74,9 @@ class Tile:
         return self.color == Colors.red
 
     def isBlank(self):
-        return self.color == Colors.white
+        return (self.color == Colors.white or 
+                self.color == Colors.yellow or
+                self.color == Colors.blue)
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.color,
