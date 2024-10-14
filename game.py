@@ -2,6 +2,7 @@ import pygame
 from algorithoms import Algorithoms
 from constants import *
 from gridmap import GridMap
+from menu import Menu
 from tile import Tile
 
 
@@ -14,7 +15,7 @@ class SSSPVisualizer:
 
         pygame.init()
         pygame.display.set_caption("Shortest Path Visualizer")
-        self.screen_size = Resolution.r600x600
+        self.screen_size = Resolution.r800x600
         self.running = True
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode(self.screen_size)
@@ -36,16 +37,7 @@ class SSSPVisualizer:
                     self.running = False
                 if (event.key == pygame.K_c):
                     self._restart()
-                if (event.key == pygame.K_r):
-                    self.map.randomMaze()
-             
-
-    def _draw(self):
-        self.screen.fill(Colors.white)
-        self.map.draw()
-        pygame.display.flip()
-
-    def _update(self):
+        #mouse events
         pos = pygame.mouse.get_pos()
         row, col = self.get_clicked_pos(pos)
         tile = self.map.grid[row][col]
@@ -63,28 +55,57 @@ class SSSPVisualizer:
             elif (not (self.startNode == None) and (self.endNode == None) and tile.isBlank()):
                 tile.makeEnd()
                 self.endNode = tile
-                Algorithoms(tileList= self.map.grid, draw=lambda:self._draw()).bfs(
-                    start=self.startNode,
-                    end=self.endNode
-                )
-            elif(self.startNode and self.endNode):
-                self.startNode.reset()
-                self.startNode = None
-                self.endNode.reset()
-                self.endNode = None
-                self.map.clearExplored()
-                                   
-                    
+              
+             
+
+    def _draw(self):
+        self.screen.fill(Colors.white)
+        self.map.draw()
+        self.menu.draw()
+        pygame.display.flip()
+    
+    def redraw(self):
+        pygame.draw.rect(self.screen, Colors.white, (0,0,600,600))
+        self.map.draw()
+        pygame.display.flip()
+
+
+    def _update(self):
+        self.menu.listenBtnEvent()
+            
 
     def _restart(self):
         self._initial()
-        self._draw()
+        pygame.draw.rect(self.screen, Colors.white, (0,0,600,600))
+        self.map.draw()
+        pygame.display.flip()
 
+
+
+    def getGameInitials(self):
+        return [
+            self.map,
+            self.startNode,
+            self.endNode,
+        ]
+    
     def _initial(self):
         self.map: GridMap = GridMap(
-            screen=self.screen, rows=Config.rows, width=self.screen_size[0])
+            screen=self.screen,
+            rows=Config.rows,
+            width=self.screen_size[1]
+        )
+
         self.startNode:Tile = None
         self.endNode:Tile = None
+
+        self.menu = Menu(
+            self.screen, 
+            self.screen_size, 
+            self.getGameInitials, 
+            self.redraw, 
+            self._restart
+        )
 
     def get_clicked_pos(self, pos):
         tile_width = self.map.width // self.map.rows
