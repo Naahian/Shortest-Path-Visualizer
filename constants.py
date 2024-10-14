@@ -9,10 +9,11 @@ class Resolution:
 
 
 class Colors:
-    white = (255, 255, 255)
-    grey = (180, 180, 180)
+    white = (250, 250, 255)
+    grey = (200, 200, 240)
     yellow = (255,255,60)
-    black = (20, 20, 25)
+    black = (20, 20, 30)
     red = (255, 0, 0)
     green = (0, 255, 0)
     blue = (45, 50, 255)
+    dark = (0, 25, 51)

@@ -38,6 +38,7 @@ class Algorithoms:
         self._drawPath(start)
 
     def bfs(self, start:Tile, end:Tile):
+        print("BFS")
         self.path = []  #clear previous data
         queue = []
         visited = [[0 for i in range(len(self.graph))] for j in range(len(self.graph))]
@@ -63,6 +64,7 @@ class Algorithoms:
     def _backtrack(self, parents, start, end):
         while True:
             end = parents[end.col][end.row]
+            if(end==0): return
             self.path.append(end)
             if(start==end):break
 
