@@ -1,5 +1,4 @@
 import pygame
-from algorithoms import Algorithoms
 from constants import *
 from gridmap import GridMap
 from menu import Menu
@@ -55,7 +54,13 @@ class SSSPVisualizer:
             elif (not (self.startNode == None) and (self.endNode == None) and tile.isBlank()):
                 tile.makeEnd()
                 self.endNode = tile
-              
+            elif(not (self.startNode == None) and not (self.endNode == None) and tile.isBlank()):
+                self.startNode.reset()
+                self.endNode.reset()
+                self.startNode = None
+                self.endNode = None
+                self.map.clearExplored()
+
              
 
     def _draw(self):
