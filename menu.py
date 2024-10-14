@@ -37,14 +37,14 @@ class Menu:
         self.column(
             x = self.centerX,
             y = (self.y+self.pad),
-            gap=30,
+            margin=30,
             children=self.buttons
         )       
 
-    def column(self, x, y, gap:int, children:list):
+    def column(self, x, y, margin:int, children:list):
         y_pos = y
         for i in range(len(children)):
-            y_pos = children[i].rect.height*(i) + gap*(i+2)
+            y_pos = children[i].rect.height*(i) + margin*(i+2)
             children[i].draw(x, y_pos)
 
     def bfsBtnEvent(self):
