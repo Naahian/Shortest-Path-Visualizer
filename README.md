@@ -8,8 +8,7 @@ Simulation of SSSP(Single source shortest path) algorithoms.Includes:<br>
 ### Documentation:
 - `LEFT CLICK` to make obstacle
 - `RIGHT CLICK` to create start and end node
-- press `R` for random maze
-- press `C` to clear canvas
+- buttons for running algorithms
 ### To Run
 install `pygame` pacakge
 ```
