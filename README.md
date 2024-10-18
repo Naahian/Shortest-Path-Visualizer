@@ -6,8 +6,7 @@ Simulation of SSSP(Single source shortest path) algorithoms.Includes:<br>
 - Dijkstra (garantees shortest path)
 - A* (fastest, garantees shortest path)
 ### Screenshot
-![image](https://github.com/user-attachments/assets/3766ed20-ba46-49d1-8978-50052c6d820f)
-
+![image](https://github.com/user-attachments/assets/271d7d5c-5053-4eb3-975c-07a083094551)
 ### Documentation:
 - `LEFT CLICK` to make obstacle
 - `RIGHT CLICK` to create start and end node
