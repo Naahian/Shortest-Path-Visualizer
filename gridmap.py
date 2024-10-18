@@ -35,7 +35,6 @@ class GridMap:
                 tile.draw(self.screen)
                 
     def randomMaze(self, seed=22):
-                
         self.grid = []
         self._createGrid()
         self._createNeighbors()
@@ -55,7 +54,8 @@ class GridMap:
     def clearExplored(self):
         for row in self.grid:
             for tile in row:
-                if(not tile.isObstacle() and not tile.isStart() and not tile.isEnd()): tile.reset()
+                if(not tile.isObstacle() and not tile.isStart() and not tile.isEnd()):
+                    tile.reset()
 
     def draw(self):
         self._drawTiles()
