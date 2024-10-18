@@ -23,7 +23,7 @@ class Menu:
             Button(self.x, self.y, lambda: print("dijkstra"), text="Run Dijkstra"),
             Button(self.x, self.y, lambda: print("A*"), text="Run A*"),
             Button(self.x, self.y, self.randomBtnEvent, text="Random Maze"),
-            Button(self.x, self.y, self.restart, text="Restart")
+            Button(self.x, self.y, self.restart, text="Restart", image="assets/orangeBtn.png", borderColor=(0,0,0), fill=(255,255,255))
         ]
 
     def draw(self, surface):

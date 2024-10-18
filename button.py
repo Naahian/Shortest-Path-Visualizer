@@ -37,20 +37,26 @@ class Button:
     
     def draw(self, surface:pygame.Surface):
        
-        
         if(self.image):
+            self.rect_image = pygame.Surface((self.w, self.h), pygame.SRCALPHA)
+            self.image = self.image.copy().convert_alpha()
+            pygame.draw.rect(self.rect_image, Colors.white,
+                        (self.border, self.border, self.w-self.border*2, self.h-self.border*2),
+                        0,
+                        self.borderRadius)
+            self.image.blit(self.rect_image, (0, 0), None, pygame.BLEND_RGBA_MIN )
             self.surface.blit(self.image, (0,0))
         else:
-            #border
-            pygame.draw.rect(self.surface, self.borderColor,
-                        (0, 0, self.w, self.h),
-                        self.border,
-                        self.borderRadius+self.border)
             #background
             pygame.draw.rect(self.surface, self.fill,
                         (self.border, self.border, self.w-self.border*2, self.h-self.border*2),
                         0,
                         self.borderRadius)
+       #border
+        pygame.draw.rect(self.surface, self.borderColor,
+                    (0, 0, self.w, self.h),
+                    self.border,
+                    self.borderRadius+self.border)
         self.drawText()
         surface.blit(self.surface, (self.rect.x, self.rect.y))
 
