@@ -36,6 +36,9 @@ class SSSPVisualizer:
                     self.running = False
                 if (event.key == pygame.K_c):
                     self._restart()
+        
+            self.menu.listenBtnEvent(event)
+        
         #mouse events
         pos = pygame.mouse.get_pos()
         row, col = self.get_clicked_pos(pos)
@@ -66,7 +69,7 @@ class SSSPVisualizer:
     def _draw(self):
         self.screen.fill(Colors.white)
         self.map.draw()
-        self.menu.draw()
+        self.menu.draw(self.screen)
         pygame.display.flip()
     
     def redraw(self):
@@ -76,8 +79,7 @@ class SSSPVisualizer:
 
 
     def _update(self):
-        self.menu.listenBtnEvent()
-            
+        pass    
 
     def _restart(self):
         self._initial()
@@ -105,8 +107,7 @@ class SSSPVisualizer:
         self.endNode:Tile = None
 
         self.menu = Menu(
-            self.screen, 
-            self.screen_size, 
+          self.screen_size, 
             self.getGameInitials, 
             self.redraw, 
             self._restart

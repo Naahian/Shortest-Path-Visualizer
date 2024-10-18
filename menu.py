@@ -6,8 +6,8 @@ from constants import Colors
 
 
 class Menu:
-    def __init__(self, screen, screenSize, getGameInitials, reDraw, restart):
-        self.screen = screen
+    def __init__(self,  screenSize, getGameInitials, reDraw, restart):
+      
         self.getGameInitials = getGameInitials
         self.reDraw = reDraw
         self.restart = restart
@@ -18,34 +18,37 @@ class Menu:
         self.pad = 40
         
         self.buttons = [
-            Button(self.screen,Button.bfs,True, self.bfsBtnEvent),
-            Button(self.screen,Button.dfs,True, self.dfsBtnEvent),
-            Button(self.screen,Button.dijkstra,True, lambda: print("dijkstra")),
-            Button(self.screen,Button.a_star,True, lambda: print("A*")),
-            Button(self.screen,Button.maze,True, self.randomBtnEvent),
-            Button(self.screen,Button.restart,True, self.restart)
+            Button(self.x, self.y, self.bfsBtnEvent, text="Run BFS"),
+            Button(self.x, self.y, self.dfsBtnEvent, text="Run DFS"),
+            Button(self.x, self.y, lambda: print("dijkstra"), text="Run Dijkstra"),
+            Button(self.x, self.y, lambda: print("A*"), text="Run A*"),
+            Button(self.x, self.y, self.randomBtnEvent, text="Random Maze"),
+            Button(self.x, self.y, self.restart, text="Restart")
         ]
 
-    def draw(self):
+    def draw(self, surface):
         #background
         pygame.draw.rect(
-            surface=self.screen,color=Colors.dark,
+            surface=surface,color=Colors.dark,
             rect=(self.x, self.y, self.width, self.height)
         )
 
         #buttons
         self.column(
-            x = self.centerX,
+            surface= surface,
+            x = self.centerX - self.buttons[0].w//2,
             y = (self.y+self.pad),
             margin=30,
             children=self.buttons
         )       
 
-    def column(self, x, y, margin:int, children:list):
+    def column(self, x, y, surface, margin:int, children:list):
         y_pos = y
         for i in range(len(children)):
             y_pos = children[i].rect.height*(i) + margin*(i+2)
-            children[i].draw(x, y_pos)
+            children[i].rect.y = y_pos
+            children[i].rect.x = x
+            children[i].draw(surface)
 
     def bfsBtnEvent(self):
         map, start, end = self.getGameInitials()
@@ -65,6 +68,6 @@ class Menu:
         map.randomMaze()
     
         
-    def listenBtnEvent(self):
+    def listenBtnEvent(self, event):
         for btn in self.buttons:
-            btn.clickEvent()
+            btn.handleEvent(event)
