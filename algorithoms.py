@@ -20,6 +20,7 @@ class Algorithoms:
     def dfs(self, start:Tile, end:Tile):
         self.path = [] #clear previous data
         visited = [[0 for i in range(len(self.graph))] for j in range(len(self.graph))]
+        parents = [[0 for i in range(len(self.graph))] for j in range(len(self.graph))]
         stack = []
         stack.append(start)
         visited[start.col][start.row] = 1
@@ -27,14 +28,16 @@ class Algorithoms:
         while(len(stack)>0):
             tile = stack.pop()
             if(tile==end):break
-            self.path.append(tile)
+            
             self._drawExplored(tile)
 
             for nbr in tile.neighbors:
                 y, x = nbr.col, nbr.row
                 if(visited[y][x] == 0 and not nbr.isObstacle()):
                     visited[y][x] = 1
+                    parents[y][x] = tile
                     stack.append(nbr)
+        self._backtrack(parents, start, end)
         self._drawPath(start)
 
     def bfs(self, start:Tile, end:Tile):
