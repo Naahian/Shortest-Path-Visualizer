@@ -1,3 +1,4 @@
+from constants import Config
 from tile import Tile
 
 
@@ -62,6 +63,36 @@ class Algorithoms:
         self._backtrack(parents, start, end)
         self._drawPath(start)
 
+    #output same as bfs since undirected graph
+    def dijkstra(self ,start:Tile, end:Tile):
+        self.path = []  #clear previous data
+        queue = []
+        parents = [[0 for i in range(len(self.graph))] for j in range(len(self.graph))]
+        distance = [[Config.rows**2 for i in range(len(self.graph))] for j in range(len(self.graph))]
+        queue.append(start)
+        distance[start.col][start.row] = 0
+
+        while(len(queue)>0):
+            tile = queue.pop(0)
+            if(tile == end): break
+            self._drawExplored(tile)
+
+            for nbr in tile.neighbors:
+                y,x = nbr.col, nbr.row
+                ty, tx = tile.col, tile.row
+                tempDist = distance[ty][tx] + 1
+
+                if(tempDist < distance[y][x] and not nbr.isObstacle()):
+                    distance[y][x] = tempDist
+                    parents[y][x] = tile
+                    queue.append(nbr)
+
+        self._backtrack(parents, start, end)
+        self._drawPath(start)
+
+    def a_star(self, start:Tile, end:Tile):
+        pass
+
     #to find shortest path
     def _backtrack(self, parents, start, end):
         while True:
@@ -70,6 +101,3 @@ class Algorithoms:
             self.path.append(end)
             if(start==end):break
 
-
-    def A_star(self):
-        pass
