@@ -34,7 +34,7 @@ class GridMap:
             for tile in row:
                 tile.draw(self.screen)
                 
-    def randomMaze(self, seed=22):
+    def randomMaze(self, seed=21):
         self.grid = []
         self._createGrid()
         self._createNeighbors()
