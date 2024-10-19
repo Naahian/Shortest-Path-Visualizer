@@ -1,8 +1,6 @@
 import pygame
 
-class Colors:
-    white = (255, 255, 255)
-    blue = (25, 25, 255)
+from constants import Colors
 
 
 class Button:
@@ -10,9 +8,10 @@ class Button:
                 onClick=lambda:None,
                 width=140, height=50,
                 image:str = None,  
-                borderColor=Colors.white,
-                fill=Colors.blue,
-                text = "Click"):
+                borderColor=Colors.black,
+                fill=Colors.blueAccent,
+                text = "Click"
+                ):
         self.w, self.h = width, height
         self.surface = pygame.surface.Surface((width,height))
         self.surface.set_colorkey((0,0,0))
@@ -36,7 +35,7 @@ class Button:
     
     
     def draw(self, surface:pygame.Surface):
-       
+        #background
         if(self.image):
             self.rect_image = pygame.Surface((self.w, self.h), pygame.SRCALPHA)
             self.image = self.image.copy().convert_alpha()
@@ -47,7 +46,6 @@ class Button:
             self.image.blit(self.rect_image, (0, 0), None, pygame.BLEND_RGBA_MIN )
             self.surface.blit(self.image, (0,0))
         else:
-            #background
             pygame.draw.rect(self.surface, self.fill,
                         (self.border, self.border, self.w-self.border*2, self.h-self.border*2),
                         0,

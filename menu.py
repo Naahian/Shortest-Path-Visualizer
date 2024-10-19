@@ -4,7 +4,6 @@ from button import Button
 from constants import Colors
 
 
-
 class Menu:
     def __init__(self,  screenSize, getGameInitials, reDraw, restart):
       
@@ -18,12 +17,12 @@ class Menu:
         self.pad = 40
         
         self.buttons = [
-            Button(self.x, self.y, self.bfsBtnEvent, text="Run BFS"),
-            Button(self.x, self.y, self.dfsBtnEvent, text="Run DFS"),
-            Button(self.x, self.y, lambda: print("dijkstra"), text="Run Dijkstra"),
-            Button(self.x, self.y, lambda: print("A*"), text="Run A*"),
-            Button(self.x, self.y, self.randomBtnEvent, text="Random Maze"),
-            Button(self.x, self.y, self.restart, text="Restart", image="assets/orangeBtn.png", borderColor=(0,0,0), fill=(255,255,255))
+            Button(self.x, self.y, onClick = lambda: self.algoBtnEvent("bfs"), text ="Run BFS", fill=Colors.orange),
+            Button(self.x, self.y, onClick = lambda: self.algoBtnEvent("dfs"), text ="Run DFS", fill=Colors.orange),
+            Button(self.x, self.y, onClick = lambda: self.algoBtnEvent("dijkstra"), text ="Run Dijkstra", fill=Colors.orange),
+            Button(self.x, self.y, onClick = lambda: self.algoBtnEvent("a*"), text ="Run A*", fill=Colors.orange),
+            Button(self.x, self.y, onClick = self.randomBtnEvent, text ="Random Maze"),
+            Button(self.x, self.y, onClick = self.restart, text ="Reset")
         ]
 
     def draw(self, surface):
@@ -50,18 +49,16 @@ class Menu:
             children[i].rect.x = x
             children[i].draw(surface)
 
-    def bfsBtnEvent(self):
+    def algoBtnEvent(self, type = ""):
         map, start, end = self.getGameInitials()
         if(start==None or end==None): return
         map.clearExplored()
-        Algorithoms(self.reDraw,map.grid).bfs(start, end)
+        if(type == ""): return
+        elif(type == "bfs"): Algorithoms(self.reDraw,map.grid).bfs(start, end)
+        elif(type == "dfs"): Algorithoms(self.reDraw,map.grid).dfs(start, end)
+        elif(type == "dijkstra"): Algorithoms(self.reDraw,map.grid).dijkstra(start, end)
+        elif(type == "a*"): Algorithoms(self.reDraw,map.grid).a_star(start, end)
     
-    def dfsBtnEvent(self):
-        map, start, end = self.getGameInitials()
-        map.clearExplored()
-        if(start==None or end==None): return
-        Algorithoms(self.reDraw,map.grid).dfs(start, end)
-
     def randomBtnEvent(self):
         self.restart()
         map = self.getGameInitials()[0]
