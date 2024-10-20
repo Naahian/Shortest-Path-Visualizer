@@ -35,7 +35,7 @@ class Menu:
         #buttons
         self.column(
             surface= surface,
-            x = self.centerX - self.buttons[0].w//2,
+            x = self.centerX - self.buttons[0].width//2,
             y = (self.y+self.pad),
             margin=30,
             children=self.buttons
@@ -44,9 +44,9 @@ class Menu:
     def column(self, x, y, surface, margin:int, children:list):
         y_pos = y
         for i in range(len(children)):
-            y_pos = children[i].rect.height*(i) + margin*(i+2)
-            children[i].rect.y = y_pos
-            children[i].rect.x = x
+            y_pos = children[i].height*(i) + margin*(i+2)
+            children[i].y = y_pos
+            children[i].x = x
             children[i].draw(surface)
 
     def algoBtnEvent(self, type = ""):

@@ -5,7 +5,7 @@ from menu import Menu
 from tile import Tile
 
 
-class SSSPVisualizer:
+class PathFinder:
     def __init__(self):
         self.screen: pygame.Surface
         self.screen_size: tuple
@@ -36,9 +36,9 @@ class SSSPVisualizer:
                     self.running = False
                 if (event.key == pygame.K_c):
                     self._restart()
-        
+            
             self.menu.listenBtnEvent(event)
-        
+
         #mouse events
         pos = pygame.mouse.get_pos()
         row, col = self.get_clicked_pos(pos)

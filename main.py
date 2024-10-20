@@ -1,5 +1,5 @@
-from game import SSSPVisualizer
+from game import PathFinder
 
 if __name__ == "__main__":
-    game = SSSPVisualizer()
+    game = PathFinder()
     game.loop()
