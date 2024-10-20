@@ -142,14 +142,3 @@ class Algorithoms:
             if(end==None): return
             self.path.append(end)
             if(start==end):break
-
-# class T:
-#     def __init__(self) -> None:
-#         pass
-
-# arr = PriorityQueue()
-# arr.put((T(),3))
-# arr.put((T(),1))
-# arr.put((T(),2))
-
-# print(arr.get()[0])
