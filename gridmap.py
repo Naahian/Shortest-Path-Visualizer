@@ -1,5 +1,5 @@
 import pygame
-from constants import Colors
+from constants import Colors, Config
 from tile import Tile
 import random
 
@@ -34,11 +34,19 @@ class GridMap:
             for tile in row:
                 tile.draw(self.screen)
                 
-    def randomMaze(self, seed=20):
+    def randomSize(self, limit=50):
+        Config.changeRow(random.randint(20, limit))
         self.grid = []
         self._createGrid()
         self._createNeighbors()
+        
 
+    def randomMaze(self):
+        seed = int(self.rows // 2.4)
+        self.grid = []
+        self._createGrid()
+        self._createNeighbors()
+        print(self.rows, int(seed))
         for i in range(self.rows * seed):
             y = random.randint(1, self.rows-1)
             x = random.randint(1, self.rows-1)
