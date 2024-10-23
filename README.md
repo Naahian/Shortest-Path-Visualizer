@@ -5,7 +5,7 @@ Simulation of path finding algorithoms. Includes:<br>
 - Dijkstra (garantees shortest path)
 - A* (fastest, garantees shortest path)
 ### Screenshot
-![image](https://github.com/user-attachments/assets/da46a7f6-e5fa-406d-af0b-0fc272a33faa)
+![image](https://github.com/user-attachments/assets/400716ae-676c-4cb4-ab57-6c5324f76ac5)
 ### Documentation:
 - `LEFT CLICK` to make obstacle
 - `RIGHT CLICK` to create start and end node
