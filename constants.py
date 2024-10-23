@@ -2,6 +2,8 @@ class Config:
     fps = 60
     rows = 50
 
+    def changeRow(row):
+        Config.rows = row
 
 class Resolution:
     r800x600 = (800, 600)
